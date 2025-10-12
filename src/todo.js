@@ -5,6 +5,7 @@ function Todo () {
         let description = descriptionParameter;
         let dueDate = dueDateParameter;
         let priority = priorityParameter;
+        let isTaskFinished = false;
 
         function updatePriority(newPriority) {
             priority = newPriority;
@@ -15,7 +16,15 @@ function Todo () {
             return priority
         };
 
-        return {title, description, dueDate, priority, updatePriority, getPriority}
+        function finishTask() {
+            isTaskFinished = true;
+        }
+
+        function getIsTaskFinished() {
+            return isTaskFinished
+        }
+
+        return {title, description, dueDate, priority, updatePriority, getPriority, isTaskFinished, finishTask, getIsTaskFinished}
        
     }
 
