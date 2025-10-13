@@ -26,7 +26,7 @@ function createMainContent () {
     const sidebar = createElement("aside", {classes:["sidebar"]})
     const main = createElement("main", {classes:["main-content"]})
 
-    return createElement("div", {classes:["container"], children:{sidebar,main}})
+    return createElement("div", {classes:["container"], children:[sidebar,main]})
 }
 
 
