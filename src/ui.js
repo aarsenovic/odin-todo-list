@@ -28,3 +28,13 @@ function createMainContent () {
 
     return createElement("div", {classes:["container"], children:{sidebar,main}})
 }
+
+
+function createMainPage() {
+  const root = document.querySelector("#root");
+  root.appendChild(createHeader());
+  root.appendChild(createMainContent());
+}
+
+
+export {createMainPage}
