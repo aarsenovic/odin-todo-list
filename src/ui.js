@@ -1,18 +1,4 @@
-function createElement(tag, { text, classes = [], children = [],  attrs = {}} = {}) {
-  const el = document.createElement(tag);
-  if (text) el.textContent = text;
-  if (classes.length) el.classList.add(...classes);
-  children.forEach(child => el.appendChild(child));
-
-    if (attrs && typeof attrs === "object") {
-    for (const [key, value] of Object.entries(attrs)) {
-      el.setAttribute(key, value);
-    }
-  }
-
-  return el;
-}
-
+import { createElement } from "./helper"
 
 
 
@@ -29,12 +15,22 @@ function createMainContent () {
     return createElement("div", {classes:["container"], children:[sidebar,main]})
 }
 
+function createAddProjectButton() {
+   
+   const buttonText = "+";
+   return createElement("button", {text:buttonText, classes:["add-new-project-button"]});
+
+}
+
 
 function createMainPage() {
   const root = document.querySelector("#root");
   root.appendChild(createHeader());
   root.appendChild(createMainContent());
+  const sidebar = document.querySelector(".sidebar");
+  sidebar.appendChild(createAddProjectButton());
 }
+
 
 
 export {createMainPage}
