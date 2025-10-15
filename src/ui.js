@@ -22,7 +22,9 @@ function createAddProjectButton() {
 }
 
 function createModalForAddNewProject() {
-  return createElement("dialog",{text: "radi", classes:["add-new-project-modal"]});
+  const heading = createElement("h2",{text:"Create a new project",classes:["add-new-project-heading"]});
+  const header = createElement("div", {classes:["add-new-project-header"], children:[heading]});
+  return createElement("dialog",{classes:["add-new-project-modal"], children:[header,]});
 }
 
 
@@ -41,7 +43,8 @@ function createMainPage() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.appendChild(createAddProjectButton());
   sidebar.appendChild(createModalForAddNewProject());
-  connectModalToAddNewProjectButton()
+  connectModalToAddNewProjectButton();
+
 }
 
 
