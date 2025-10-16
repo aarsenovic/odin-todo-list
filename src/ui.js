@@ -24,7 +24,11 @@ function createAddProjectButton() {
 function createModalForAddNewProject() {
   const heading = createElement("h2",{text:"Create a new project",classes:["add-new-project-heading"]});
   const header = createElement("div", {classes:["add-new-project-header"], children:[heading]});
-  return createElement("dialog",{classes:["add-new-project-modal"], children:[header,]});
+  const addNewProjectInput = createElement("input", {classes:["input-new-project"], attrs:{"type":"text"}});
+  const addNewProjectSubmit = createElement("button", {text:"CREATE PROJECT", classes: ["submit-project-button"], attrs:{"type":"submit"}});
+  const form = createElement("form", {classes:["add-new-project-form"], children:[addNewProjectInput, addNewProjectSubmit]});
+
+  return createElement("dialog",{classes:["add-new-project-modal"], children:[header, form]});
 }
 
 
