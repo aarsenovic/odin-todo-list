@@ -48,9 +48,30 @@ dialog {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-   
+    border: 1px solid black;
 }
 
 dialog::backdrop {
      backdrop-filter: blur(10px);
+}
+
+.add-new-project-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.add-new-project-heading {
+    text-align: center;
+    background-color: violet;
+    color: white;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+
+.add-new-project-form>input {
+    width: 400px;
 }
