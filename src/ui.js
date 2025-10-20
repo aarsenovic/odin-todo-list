@@ -22,8 +22,9 @@ function createAddProjectButton() {
 }
 
 function createModalForAddNewProject() {
+  const closeButton = createElement("button",{text:"X", classes:["close-button"]})
   const heading = createElement("h2",{text:"Create a new project",classes:["add-new-project-heading"]});
-  const header = createElement("div", {classes:["add-new-project-header"], children:[heading]});
+  const header = createElement("div", {classes:["add-new-project-header"], children:[heading, closeButton]});
   const label = createElement("label", {text:"Title",classes: ["add-new-project-label"], attrs:{"for":"project-name"}})
   const addNewProjectInput = createElement("input", {classes:["input-new-project"], attrs:{"type":"text", "name":"project-name", "id":"project-name"}});
   const addNewProjectSubmit = createElement("button", {text:"CREATE PROJECT", classes: ["submit-project-button"], attrs:{"type":"submit"}});
@@ -33,12 +34,23 @@ function createModalForAddNewProject() {
 }
 
 
-function connectModalToAddNewProjectButton() {
+function connectModalToButtons() {
   const addNewProjectButton = document.querySelector(".add-new-project-button");
-  const dialog = document.querySelector("dialog")
+  const dialog = document.querySelector("dialog");
+  const closeButton = document.querySelector(".close-button");
   
   addNewProjectButton.addEventListener("click", ()=>{dialog.showModal()})
+   closeButton.addEventListener("click", ()=>{dialog.close()})
 }
+
+
+
+
+function renderProject(project) {
+  const sidebar = document.querySelector();
+
+}
+
 
 
 function createMainPage() {
@@ -48,7 +60,7 @@ function createMainPage() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.appendChild(createAddProjectButton());
   sidebar.appendChild(createModalForAddNewProject());
-  connectModalToAddNewProjectButton();
+  connectModalToButtons();
 
 }
 

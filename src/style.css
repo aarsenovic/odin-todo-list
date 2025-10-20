@@ -66,12 +66,24 @@ dialog::backdrop {
 
 .add-new-project-heading {
     text-align: center;
-    background-color: violet;
+    justify-self: center;
     color: white;
     padding-top: 0.4em;
     padding-bottom: 0.4em;
+    margin-left: 300px;
 }
 
 .add-new-project-form>input {
     width: 400px;
+}
+
+
+.add-new-project-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: violet;
+}
+
+.close-button{
+    margin-right: 20px;
 }
