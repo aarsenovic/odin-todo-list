@@ -1,5 +1,5 @@
 import { Project } from "./projects";
-
+import { renderProject } from "./ui";
 
 
 function todoController() {
@@ -12,6 +12,8 @@ function todoController() {
             const projectTitle = document.querySelector('[name="project-name"]').value;
 
             const newProject = project.createProject(projectTitle);
+
+            renderProject(newProject)
 
             console.log(newProject);
 

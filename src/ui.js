@@ -47,7 +47,10 @@ function connectModalToButtons() {
 
 
 function renderProject(project) {
-  const sidebar = document.querySelector();
+  const sidebar = document.querySelector(".sidebar");
+  const projectDiv = createElement("div", {text:project.name, classes:["project"]})
+  sidebar.appendChild(projectDiv);
+  
 
 }
 
@@ -66,4 +69,4 @@ function createMainPage() {
 
 
 
-export {createMainPage}
+export {createMainPage, renderProject}
