@@ -51,7 +51,8 @@ function renderProject(project) {
   const projectDiv = createElement("div", {text:project.name, classes:["project"]})
   sidebar.appendChild(projectDiv);
   
-
+  const mainContent = document.querySelector(".main-content");
+  mainContent.appendChild(createElement("button", {text:"Add-todo", classes:["add-todo"]}))
 }
 
 

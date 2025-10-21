@@ -87,3 +87,8 @@ dialog::backdrop {
 .close-button{
     margin-right: 20px;
 }
+
+.project {
+        grid-column-start: 1;
+    grid-column-end: 2;
+}
