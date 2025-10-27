@@ -52,7 +52,41 @@ function renderProject(project) {
   sidebar.appendChild(projectDiv);
   
   const mainContent = document.querySelector(".main-content");
-  mainContent.appendChild(createElement("button", {text:"Add-todo", classes:["add-todo"]}))
+  const addTodoButton = createElement("button", {text:"Add-todo", classes:["add-todo"]});
+  mainContent.appendChild(addTodoButton);
+  
+  const todoModal = createModalForAddingTodo();
+  mainContent.appendChild(todoModal); 
+  addTodoButton.addEventListener("click", ()=>todoModal.showModal());
+}
+
+
+
+function createModalForAddingTodo(){
+  // const todoCreationDialog = createElement("dialog", {classes:["todo-creation-dialog"]});
+  const closeButton = createElement("button",{text:"X", classes:["close-button-todo"]});
+  const heading = createElement("h2",{text:"Create a new todo",classes:["add-new-project-heading"]});
+  const header = createElement("div", {classes:["add-new-project-header"], children:[heading, closeButton]});
+  const labelForTitle = createElement("label", {text:"Title",classes: ["add-new-todo-label"], attrs:{"for":"todo-name"}});
+  const todoTitleInput = createElement("input", {classes:["input-todo-title"], attrs:{"type":"text", "name":"todo-name", "id":"todo-name"}});
+  const labelForDescription = createElement("label", {text:"Description",classes: ["todo-description-label"], attrs:{"for":"todo-description"}});
+  const todoDescriptionInput = createElement("input", {classes:["input-todo-description"], attrs:{"type":"text", "name":"todo-description", "id":"todo-description"}});
+  const labelForDate = createElement("label", {text:"Due Date",classes: ["todo-due-date"], attrs:{"for":"todo-due-date"}});
+  const todoDateInput = createElement("input", {classes:["input-todo-date"], attrs:{"type":"date", "name":"todo-due-date", "id":"todo-due-date"}});
+  const labelForPriority = createElement("label", {text:"Priority",classes: ["todo-priority-label"], attrs:{"for":"priority"}});
+  const priorityOptionLow = createElement("option", {text:"low", attrs:{"value":"low"}});
+  const priorityOptionMedium = createElement("option", {text:"medium", attrs:{"value":"medium"}});
+  const priorityOptionHigh = createElement("option", {text:"high", attrs:{"value":"high"}});
+  const todoPrioritySelect = createElement("select", {classes:["input-todo-priority"], attrs:{"name":"priority", "id":"priority"}, children: [priorityOptionLow, priorityOptionMedium, priorityOptionHigh]});
+  const addNewTodoSubmit = createElement("button", {text:"CREATE TODO", classes: ["submit-todo-button"], attrs:{"type":"submit"}});
+
+  const form = createElement("form", {classes:["add-new-todo-form"], children:[labelForTitle, todoTitleInput, labelForDescription, todoDescriptionInput, labelForDate, todoDateInput, labelForPriority, todoPrioritySelect, addNewTodoSubmit]});
+
+
+
+
+  return createElement("dialog", {classes:"add-new-todo-modal", children:[header, form]})
+
 }
 
 
