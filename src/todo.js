@@ -15,6 +15,7 @@ function Todo () {
         function getPriority() {
             return priority
         };
+        
 
         function finishTask() {
             isTaskFinished = true;
