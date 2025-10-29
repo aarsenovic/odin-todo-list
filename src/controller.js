@@ -1,6 +1,7 @@
 import { Project } from "./projects";
 import { renderProject } from "./ui";
 import { Todo } from "./todo";
+import { renderProjectContent } from "./ui";
 
 function todoController() {
     const projects = [];
@@ -13,9 +14,11 @@ function todoController() {
             const projectTitle = document.querySelector('[name="project-name"]').value;
 
             const newProject = project.createProject(projectTitle);
+            console.log("NOVI PROJEKAT", newProject)
 
             renderProject(newProject)
             projects.push(newProject);
+            //renderProjectContent(newProject);
 
             console.log(newProject);
             console.log("ARRAY", projects)
@@ -40,6 +43,7 @@ function todoController() {
             document.querySelector('[name="priority"]').value="";
 
             console.log("Lista todova",project.getTodoList())
+            renderProjectContent(project);
 
         })
     }

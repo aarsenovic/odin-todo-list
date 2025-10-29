@@ -5,7 +5,7 @@ function Project() {
 
     function createProject(nameParameter) {
        let name = nameParameter;
-        return { name, todoList }
+        return { name, todoList, addNewTask, getTodoList }
     }
 
     function addNewTask(task) {
