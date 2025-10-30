@@ -4,9 +4,16 @@ import { Todo } from "./todo";
 import { renderProjectContent } from "./ui";
 
 function todoController() {
+    //Dodaj default projekte
     const projects = [];
     const project = Project();
-    const todo = Todo(); 
+    const gym = project.createProject("Gym");
+    const house = project.createProject("House");
+    const skills = project.createProject("Skills");
+    const defaultProjects = [gym,house,skills];
+    projects.push(...defaultProjects);
+    projects.forEach((item)=>renderProject(item));
+    const todo = Todo();
     function attachListenerForProjectCreation() {
         const formForCreatingProject = document.querySelector(".add-new-project-form");
         formForCreatingProject.addEventListener("submit", function(event){
@@ -18,7 +25,7 @@ function todoController() {
 
             renderProject(newProject)
             projects.push(newProject);
-            //renderProjectContent(newProject);
+            renderProjectContent(newProject);
 
             console.log(newProject);
             console.log("ARRAY", projects)

@@ -92,7 +92,7 @@ function renderProject(project) {
 function renderProjectContent(project) {
     const mainContent  = document.querySelector(".main-content");
     const addTodoButton = createElement("button", {text: "Add-todo", classes: ["add-todo"]});
-
+    mainContent.appendChild(addTodoButton);
     project.getTodoList().forEach(todo => {
        
       mainContent.appendChild(createElement("div", {text:todo.title, classes: ["todo"]}));
