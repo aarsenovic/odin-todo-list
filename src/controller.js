@@ -7,13 +7,14 @@ function todoController() {
     //Dodaj default projekte
     const projects = [];
     const project = Project();
-    const gym = project.createProject("Gym");
-    const house = project.createProject("House");
-    const skills = project.createProject("Skills");
-    const defaultProjects = [gym,house,skills];
-    projects.push(...defaultProjects);
-    projects.forEach((item)=>renderProject(item));
+    // const gym = project.createProject("Gym");
+    // const house = project.createProject("House");
+    // const skills = project.createProject("Skills");
+    // const defaultProjects = [gym,house,skills];
+    // projects.push(...defaultProjects);
+    // projects.forEach((item)=>renderProject(item));
     const todo = Todo();
+    let currentProjectState = null;
     function attachListenerForProjectCreation() {
         const formForCreatingProject = document.querySelector(".add-new-project-form");
         formForCreatingProject.addEventListener("submit", function(event){
@@ -23,9 +24,9 @@ function todoController() {
             const newProject = project.createProject(projectTitle);
             console.log("NOVI PROJEKAT", newProject)
 
-            renderProject(newProject)
+            renderProject(newProject, projects.length)
             projects.push(newProject);
-            renderProjectContent(newProject);
+            // renderProjectContent(newProject);
 
             console.log(newProject);
             console.log("ARRAY", projects)
@@ -50,14 +51,23 @@ function todoController() {
             document.querySelector('[name="priority"]').value="";
 
             console.log("Lista todova",project.getTodoList())
-            renderProjectContent(project);
+            // renderProjectContent(project);
 
+        })
+    }
+    
+    function attachListenerToSidebar() {
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.addEventListener("click", (e)=>{
+            if(e.target.tagName === "DIV") {
+                console.log("data-index",e.target.dataset.indexNumber);
+            }
         })
     }
 
     attachListenerForProjectCreation();
     attachListenerForTodoCreation();
-
+    attachListenerToSidebar();
 }
 
 

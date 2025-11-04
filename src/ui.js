@@ -68,9 +68,9 @@ function connectModalToButtons() {
 
 // Verovatno rename u add project to sidebar
 // Napravi pravi render project koji ce  da isprazni main content renderuje dugme za dodavanje todo-a i sve todo-e koji se nalaze u tom projectu.
-function renderProject(project) {
+function renderProject(project, projectslenght) {
   const sidebar = document.querySelector(".sidebar");
-  const projectDiv = createElement("div", { text: project.name, classes: ["project"] })
+  const projectDiv = createElement("div", { text: project.name, classes: ["project"], attrs:{"data-index-number":`${projectslenght}`} })
   sidebar.appendChild(projectDiv);
 
   const mainContent = document.querySelector(".main-content");
