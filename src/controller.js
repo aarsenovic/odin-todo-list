@@ -4,9 +4,33 @@ import { Todo } from "./todo";
 import { renderProjectContent } from "./ui";
 
 function todoController() {
-    //Dodaj default projekte
+
     const projects = [];
     const project = Project();
+    //Dodaj default projekte
+    const storageItems = {...localStorage};
+    console.log("Ovo imamo u storage-u", storageItems);
+
+    if(storageItems) {
+        for (const [key,value] of Object.entries(storageItems)) {
+            //projects.push(JSON.parse(value));
+            const storageValue = JSON.parse(value);
+            console.log("DA LI POSTOJI", storageValue.name);
+            const storagedProject = project.createProject(storageValue.name);
+            storageValue.todoList.forEach((todo)=>{storagedProject.addNewTask(todo)});
+            projects.push(storagedProject);
+            renderProject(storagedProject, projects.indexOf(storagedProject));
+        }
+    }
+    
+    console.log("prvi",projects[0]);
+    
+    if(projects.length>0){
+        renderProjectContent(projects[0]);
+    }
+    
+
+  
     // const gym = project.createProject("Gym");
     // const house = project.createProject("House");
     // const skills = project.createProject("Skills");
@@ -24,8 +48,10 @@ function todoController() {
             const newProject = project.createProject(projectTitle);
             console.log("NOVI PROJEKAT", newProject)
 
-            renderProject(newProject, projects.length)
+       
             projects.push(newProject);
+            renderProject(newProject, projects.indexOf(newProject));
+            currentProjectState = projects.indexOf(newProject);
             // renderProjectContent(newProject);
 
             console.log(newProject);
@@ -43,15 +69,17 @@ function todoController() {
             const todoDateInput = document.querySelector('[name="todo-due-date"]').value;
             const todoPriorityInput = document.querySelector('[name="priority"]').value;
 
-            project.addNewTask(todo.createTodo(todoTitleInput, todoDescriptionInput, todoDateInput, todoPriorityInput));
+            const newTodo = todo.createTodo(todoTitleInput, todoDescriptionInput, todoDateInput, todoPriorityInput);
+            projects[currentProjectState].addNewTask(newTodo);
 
             document.querySelector('[name="todo-name"]').value = "";
             document.querySelector('[name="todo-description"]').value="";
             document.querySelector('[name="todo-due-date"]').value="";
             document.querySelector('[name="priority"]').value="";
 
-            console.log("Lista todova",project.getTodoList())
+            // console.log("Lista todova",project.getTodoList(), project.name)
             // renderProjectContent(project);
+            renderProjectContent(projects[currentProjectState]);
 
         })
     }
@@ -59,8 +87,10 @@ function todoController() {
     function attachListenerToSidebar() {
         const sidebar = document.querySelector(".sidebar");
         sidebar.addEventListener("click", (e)=>{
-            if(e.target.tagName === "DIV") {
-                console.log("data-index",e.target.dataset.indexNumber);
+            if(e.target.className === "project") {
+                currentProjectState = Number(e.target.dataset.indexNumber);
+                console.log("trenutni state bajo",currentProjectState);
+                renderProjectContent(projects[currentProjectState]);
             }
         })
     }
@@ -68,6 +98,7 @@ function todoController() {
     attachListenerForProjectCreation();
     attachListenerForTodoCreation();
     attachListenerToSidebar();
+
 }
 
 

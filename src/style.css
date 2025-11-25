@@ -98,3 +98,18 @@ dialog::backdrop {
     padding-top: 1em;
     padding-bottom: 1em;
 }
+
+/* 
+.todo-details-modal {
+    width: 800px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+}
+
+.todo-details-modal::backdrop {
+     backdrop-filter: blur(10px);
+} */
+

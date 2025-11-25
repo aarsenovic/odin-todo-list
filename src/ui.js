@@ -74,8 +74,13 @@ function renderProject(project, projectslenght) {
   sidebar.appendChild(projectDiv);
 
   const mainContent = document.querySelector(".main-content");
-  const addTodoButton = createElement("button", { text: "Add-todo", classes: ["add-todo"] });
-  mainContent.appendChild(addTodoButton);
+  const existingAddTodoButton = document.querySelector(".add-todo");
+
+  if(!existingAddTodoButton) {
+      const addTodoButton = createElement("button", { text: "Add-todo", classes: ["add-todo"] });
+      mainContent.appendChild(addTodoButton);
+  }
+
 
   // const todoModal = createModalForAddingTodo();
   // mainContent.appendChild(todoModal); 
@@ -91,11 +96,40 @@ function renderProject(project, projectslenght) {
 //Treba da ima event listener koji ce na click ovo prokovati
 function renderProjectContent(project) {
     const mainContent  = document.querySelector(".main-content");
+    const todoDetailsModal = createElement("dialog", {classes: ["todo-details-modal"]});
+   
     const addTodoButton = createElement("button", {text: "Add-todo", classes: ["add-todo"]});
+    mainContent.replaceChildren();
+    mainContent.appendChild(todoDetailsModal);
     mainContent.appendChild(addTodoButton);
-    project.getTodoList().forEach(todo => {
-       
-      mainContent.appendChild(createElement("div", {text:todo.title, classes: ["todo"]}));
+    const projectTodoList = project.getTodoList();
+    let i = 1;
+    projectTodoList.forEach(todo => {
+      const detailsButton = createElement("button", {text: "Details", classes:["todo-details-button"], attrs:{"data-index-number":`${i}`}});
+      mainContent.appendChild(createElement("div", {text:todo.title, classes: ["todo"], children:[detailsButton]}));
+
+   
+    
+    detailsButton.addEventListener("click",()=>{
+        todoDetailsModal.showModal();
+        const todoHeader = createElement("h2", {text: todo.title, classes: ["todo-title"]});
+        const description = createElement("p", {text: todo.description, classes: ["todo-description"]});
+        const dueDate = createElement("p", {text: todo.dueDate, classes: ["todo-due-date"]});
+        const priority = createElement("p", {text: todo.priority, classes: ["todo-priority"]});
+        const closeButton = createElement("button", {text:"X", classes:["close-todo-modal"]});
+        const todoDialongHeadingSection = createElement("div", {classes:["todo-modal-heading"],children:[todoHeader,closeButton]})
+        const todoDialogContainer = createElement("div", {classes:"todo-dialog-container", children: [todoDialongHeadingSection,description,dueDate,priority]});
+
+
+        // const closeButtonReference = document.querySelector(".close-todo-modal");
+        closeButton.addEventListener("click", ()=>{
+          todoDetailsModal.close();
+          todoDetailsModal.replaceChildren();
+        })
+
+        todoDetailsModal.appendChild(todoDialogContainer);
+      })
+      i++ 
     });
 }
 
