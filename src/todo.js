@@ -25,7 +25,32 @@ function Todo () {
             return isTaskFinished
         }
 
-        return {title, description, dueDate, priority, updatePriority, getPriority, isTaskFinished, finishTask, getIsTaskFinished}
+        function updateTodo(newTitle, newDescription, newDueDate, newPriority, newIsTaskFinished) {
+            if(newTitle) {
+                title = newTitle
+            }
+
+            if(newDescription) {
+                description = newDescription;
+            }
+
+            if(newDueDate) {
+                dueDate = newDueDate;
+            }
+
+            if (newPriority) {
+                priority = newPriority;
+            }
+
+            if(newIsTaskFinished) {
+                isTaskFinished = newIsTaskFinished;
+            }
+        }
+
+
+
+
+        return {title, description, dueDate, priority, updatePriority, getPriority, isTaskFinished, finishTask, getIsTaskFinished, updateTodo}
        
     }
 
