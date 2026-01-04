@@ -17,6 +17,7 @@ function todoController() {
             const storageValue = JSON.parse(value);
             console.log("DA LI POSTOJI", storageValue.name);
             const storagedProject = project.createProject(storageValue.name);
+            console.log("Ovako izgleda ova lista",storageValue.todoList)
             storageValue.todoList.forEach((todo) => { storagedProject.addNewTask(todo) });
             projects.push(storagedProject);
             renderProject(storagedProject, projects.indexOf(storagedProject));
@@ -110,13 +111,17 @@ function todoController() {
             const todoUpdateDateInput = document.querySelector('[name="update-todo-due-date"]').value;
             const todoUpdatePriorityInput = document.querySelector('[name="update-priority"]').value;
 
-
+            console.log("iz apdejta", projects[currentProjectState]);
+            const currentProject = projects[currentProjectState].getTodoList();
+            console.log("iz apdejta", currentProject)
+            currentProject[currentTodoState].updateTodo(todoUpdateTitleInput, todoUpdateDescriptionInput, todoUpdateDateInput, todoUpdatePriorityInput);
 
             document.querySelector('[name="update-todo-name"]').value = "";
             document.querySelector('[name="update-todo-description"]').value = "";
             document.querySelector('[name="update-todo-due-date"]').value = "";
             document.querySelector('[name="update-priority"]').value = "";
 
+            console.log("trenutno stanje", currentProject[currentTodoState]);
         })
     }
 
@@ -135,6 +140,7 @@ function todoController() {
     attachListenerForTodoCreation();
     attachListenerToSidebar();
     attachListenerForCurrentTodoState();
+    attachListenerForTodoUpdate();
 }
 
 
